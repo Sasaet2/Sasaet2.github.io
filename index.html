@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="صموئيل صبحي - مطور تطبيقات هجينة ومهندس روبوتات وأنظمة مدمجة">
+  <title>Samuel Sobhi | صموئيل صبحي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #050811;
+      --card-bg: rgba(15, 23, 42, .65);
+      --neon-cyan: #00f3ff;
+      --neon-purple: #8b5cf6;
+      --neon-green: #10b981;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      overflow-x: hidden;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: "Cairo", sans-serif;
+      line-height: 1.7;
+    }
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .container { max-width: 1150px; margin: auto; padding: 0 22px; }
+    nav {
+      position: sticky;
+      top: 15px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding: 18px 25px;
+      border: 1px solid rgba(0, 243, 255, .15);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, .5);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+    .logo {
+      color: var(--neon-cyan);
+      font: 700 1.35rem "Fira Code", monospace;
+      text-decoration: none;
+      text-shadow: 0 0 12px rgba(0, 243, 255, .5);
+    }
+    .logo span { color: #fff; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      position: relative;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .nav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 243, 255, .6); }
+    .hero {
+      display: flex;
+      min-height: 85vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 0;
+      text-align: center;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      padding: 8px 20px;
+      border: 1px solid rgba(0, 243, 255, .3);
+      border-radius: 50px;
+      background: rgba(0, 243, 255, .08);
+      color: var(--neon-cyan);
+      font-size: .9rem;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(0, 243, 255, .15);
+    }
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      box-shadow: 0 0 10px var(--neon-green);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, .7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    }
+    .hero h1 {
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #fff, var(--neon-cyan), var(--neon-purple), #fff);
+      background-size: 200% auto;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.2;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+    .typewriter-box {
+      min-height: 40px;
+      margin-bottom: 25px;
+      color: var(--neon-cyan);
+      font: 1.4rem "Fira Code", "Cairo", monospace;
+    }
+    .cursor { display: inline-block; width: 3px; background: var(--neon-cyan); animation: blink .8s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero p { max-width: 680px; margin-bottom: 40px; color: var(--text-dim); font-size: 1.15rem; }
+    .cta-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+    .btn-glow, .btn-glass {
+      display: inline-block;
+      padding: 14px 34px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .btn-glow {
+      color: #050811;
+      background: linear-gradient(135deg, var(--neon-cyan), #38bdf8);
+      box-shadow: 0 0 25px rgba(0, 243, 255, .4);
+    }
+    .btn-glow:hover, .btn-glass:hover { transform: translateY(-4px) scale(1.03); }
+    .btn-glow:hover { box-shadow: 0 0 40px rgba(0, 243, 255, .7); }
+    .btn-glass {
+      border: 1px solid rgba(255, 255, 255, .15);
+      color: #fff;
+      background: rgba(255, 255, 255, .05);
+      backdrop-filter: blur(10px);
+    }
+    .btn-glass:hover { border-color: var(--neon-purple); background: rgba(139, 92, 246, .15); }
+    .section-header { margin: 90px 0 50px; text-align: center; }
+    .section-header span { color: var(--neon-purple); font: .95rem "Fira Code", monospace; letter-spacing: 2px; }
+    .section-header h2 { margin-top: 5px; font-size: 2.5rem; font-weight: 800; }
+    .terminal-window {
+      max-width: 800px;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid rgba(0, 243, 255, .3);
+      border-radius: 16px;
+      background: #090d16;
+      direction: ltr;
+      text-align: left;
+      font-family: "Fira Code", monospace;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .7), 0 0 30px rgba(0, 243, 255, .1);
+    }
+    .terminal-bar { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid rgba(255, 255, 255, .08); background: #111827; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ef4444; } .yellow { background: #f59e0b; } .green { background: #10b981; }
+    .terminal-title { margin-left: auto; color: var(--text-dim); font-size: .85rem; }
+    .terminal-body { min-height: 240px; max-height: 350px; overflow-y: auto; padding: 22px; color: #e2e8f0; font-size: .92rem; }
+    .terminal-line { margin-bottom: 10px; white-space: pre-line; }
+    .prompt { color: var(--neon-green); font-weight: 600; }
+    .cmd-output { color: var(--neon-cyan); }
+    .terminal-input-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+    #terminal-input { width: 100%; border: 0; outline: 0; background: transparent; color: #fff; font: .95rem "Fira Code", monospace; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .contact-card {
+      display: block;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      background: var(--card-bg);
+      color: #fff;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .contact-card:hover { border-color: var(--neon-cyan); transform: translateY(-4px); }
+    .contact-card strong { display: block; margin-bottom: 5px; color: var(--neon-cyan); }
+    .contact-card span { color: var(--text-dim); font-size: .92rem; }
+    footer { margin-top: 100px; padding: 40px 0; border-top: 1px solid rgba(255, 255, 255, .08); color: var(--text-dim); text-align: center; }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+      .section-header h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <nav aria-label="التنقل الرئيسي">
+      <a class="logo" href="#home">&lt;Samuel<span>.Dev/&gt;</span></a>
+      <ul class="nav-links">
+        <li><a href="#terminal">تيرمينال تفاعلي</a></li>
+        <li><a href="#contact">تواصل معي</a></li>
+        <li><a href="https://github.com/Sasaet2" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="status-pill"><span class="pulse-dot"></span> متاح للعمل على المشاريع التقنية والروبوتات</div>
+        <h1>صموئيل صبحي</h1>
+        <div class="typewriter-box"><span id="typewriter"></span><span class="cursor">&nbsp;</span></div>
+        <p>مطور تطبيقات هجين، مهووس بالروبوتات والأنظمة المدمجة (ESP32)، وأبني أدوات ذكية تجمع بين البرمجة والهاردوير.</p>
+        <div class="cta-group">
+          <a class="btn-glow" href="#terminal">استكشف أعمالي 🚀</a>
+          <a class="btn-glass" href="#terminal">جرب التيرمينال التفاعلي &gt;_</a>
+        </div>
+      </section>
+
+      <section id="terminal">
+        <div class="section-header"><span>// INTERACTIVE SHELL</span><h2>تحدث مع النظام مباشرة</h2></div>
+        <div class="terminal-window">
+          <div class="terminal-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="terminal-title">samuel@samuelsobhi.me:~</span></div>
+          <div id="terminal-body" class="terminal-body">
+            <div class="terminal-line">Welcome to Samuel's Interactive Terminal v2.0!<br>Type <span class="prompt">help</span> to see available commands.</div>
+            <div class="terminal-input-row"><span class="prompt">guest@samuel:~$</span><input id="terminal-input" type="text" autocomplete="off" aria-label="أدخل أمر التيرمينال"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-header"><span>// CONTACT</span><h2>تواصل معي</h2></div>
+        <div class="contact-grid">
+          <a class="contact-card" href="https://wa.me/201278341932" target="_blank" rel="noopener">
+            <strong>واتساب</strong>
+            <span>01278341932</span>
+          </a>
+          <a class="contact-card" href="mailto:sas045566@gmail.com">
+            <strong>البريد الإلكتروني</strong>
+            <span>sas045566@gmail.com</span>
+          </a>
+          <a class="contact-card" href="https://github.com/Sasaet2" target="_blank" rel="noopener">
+            <strong>GitHub</strong>
+            <span>github.com/Sasaet2</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>© 2026 Samuel Sobhi — Built with Code &amp; Passion on samuelsobhi.me</footer>
+  </div>
+
+  <script>
+    const phrases = [
+      "Flutter & Mobile App Developer",
+      "Robotics & ESP32 Hardware Builder",
+      "AI & Python Automation Enthusiast",
+      "مطور برمجيات وصانع أنظمة ذكية"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeEl = document.getElementById("typewriter");
+
+    function typeLoop() {
+      const current = phrases[phraseIndex];
+      typeEl.textContent = isDeleting
+        ? current.substring(0, charIndex--)
+        : current.substring(0, charIndex++);
+      let speed = isDeleting ? 45 : 90;
+      if (!isDeleting && charIndex === current.length + 1) {
+        speed = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400;
+      }
+      setTimeout(typeLoop, speed);
+    }
+    typeLoop();
+
+    const termInput = document.getElementById("terminal-input");
+    const termBody = document.getElementById("terminal-body");
+    const inputRow = termInput.parentElement;
+    const commands = {
+      help: "Available commands:\n  about    - Who is Samuel Sobhi?\n  skills   - List technical stack\n  projects - View key projects\n  contact  - Get GitHub & Email\n  clear    - Clear terminal screen",
+      about: "Samuel Sobhi: Developer, Robotics competitor, and Embedded Systems creator.",
+      skills: "Languages: Dart, C++, Python, HTML/CSS/JS\nHardware: ESP32, Arduino, Sensors, Custom Circuits",
+      projects: "1. Offline P2P Messenger (Flutter + WebRTC)\n2. Sumo & Desktop Companion Robots (ESP32)\n3. Jarvis AI Voice Assistant (Python)",
+      contact: "WhatsApp: 01278341932\nGitHub: github.com/Sasaet2\nEmail: sas045566@gmail.com\nDomain: samuelsobhi.me"
+    };
+
+    termInput.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
+      const value = termInput.value.trim();
+      const rawCommand = value.toLowerCase();
+      if (!rawCommand) return;
+
+      const historyLine = document.createElement("div");
+      historyLine.className = "terminal-line";
+      const prompt = document.createElement("span");
+      prompt.className = "prompt";
+      prompt.textContent = "guest@samuel:~$";
+      historyLine.append(prompt, ` ${value}`);
+      termBody.insertBefore(historyLine, inputRow);
+
+      if (rawCommand === "clear") {
+        termBody.querySelectorAll(".terminal-line").forEach(line => line.remove());
+      } else {
+        const response = document.createElement("div");
+        response.className = "terminal-line cmd-output";
+        response.textContent = commands[rawCommand] || `Command not found: '${value}'. Type 'help' for commands.`;
+        termBody.insertBefore(response, inputRow);
+      }
+      termInput.value = "";
+      termBody.scrollTop = termBody.scrollHeight;
+    });
+
+    const canvas = document.getElementById("particles-canvas");
+    const ctx = canvas.getContext("2d");
+    const particles = [];
+    const mouse = { x: null, y: null };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("mousemove", event => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - .5) * .8;
+        this.vy = (Math.random() - .5) * .8;
+        this.size = 2;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.fillStyle = "rgba(0, 243, 255, .6)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    for (let i = 0; i < 65; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle, i) => {
+        particle.update();
+        particle.draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const other = particles[j];
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 130) {
+            ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance / 130})`;
+            ctx.lineWidth = .6;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        }
+        if (mouse.x === null) return;
+        const dx = particle.x - mouse.x;
+        const dy = particle.y - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 160) {
+          ctx.strokeStyle = `rgba(139, 92, 246, ${1 - distance / 160})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
