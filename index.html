@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="صموئيل صبحي - مطور تطبيقات هجينة ومهندس روبوتات وأنظمة مدمجة">
-  <title>Samuel Sobhi | صموئيل صبحي</title>
+  <title>Samuel Sobhi | صموئيل صبحي - مطور برمجيات ومشاريع تقنية</title>
+  <meta name="description" content="الموقع الشخصي لصموئيل صبحي (Samuel Sobhi). استكشف مشاريعي في البرمجة، تطوير التطبيقات، والأنظمة الذكية.">
+  <meta name="keywords" content="Samuel Sobhi, صموئيل صبحي, برمجة, تطوير مواقع, تطبيقات Flutter, مشاريع تقنية">
+  <meta name="author" content="Samuel Sobhi">
+  <link rel="canonical" href="https://samuelsobhi.me">
+  <meta property="og:title" content="Samuel Sobhi | الموقع الشخصي">
+  <meta property="og:description" content="تعرف على أعمالي ومشاريعي التقنية في تطوير الويب والتطبيقات.">
+  <meta property="og:url" content="https://samuelsobhi.me">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://samuelsobhi.me/preview.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,7 +26,6 @@
       --text-main: #f8fafc;
       --text-dim: #94a3b8;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
       overflow-x: hidden;
@@ -206,7 +213,6 @@
         <li><a href="https://github.com/Sasaet2" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
     </nav>
-
     <main>
       <section id="home" class="hero">
         <div class="status-pill"><span class="pulse-dot"></span> متاح للعمل على المشاريع التقنية والروبوتات</div>
@@ -218,7 +224,6 @@
           <a class="btn-glass" href="#terminal">جرب التيرمينال التفاعلي &gt;_</a>
         </div>
       </section>
-
       <section id="terminal">
         <div class="section-header"><span>// INTERACTIVE SHELL</span><h2>تحدث مع النظام مباشرة</h2></div>
         <div class="terminal-window">
@@ -229,7 +234,6 @@
           </div>
         </div>
       </section>
-
       <section id="contact">
         <div class="section-header"><span>// CONTACT</span><h2>تواصل معي</h2></div>
         <div class="contact-grid">
@@ -250,7 +254,6 @@
     </main>
     <footer>© 2026 Samuel Sobhi — Built with Code &amp; Passion on samuelsobhi.me</footer>
   </div>
-
   <script>
     const phrases = [
       "Flutter & Mobile App Developer",
@@ -262,7 +265,6 @@
     let charIndex = 0;
     let isDeleting = false;
     const typeEl = document.getElementById("typewriter");
-
     function typeLoop() {
       const current = phrases[phraseIndex];
       typeEl.textContent = isDeleting
@@ -280,7 +282,6 @@
       setTimeout(typeLoop, speed);
     }
     typeLoop();
-
     const termInput = document.getElementById("terminal-input");
     const termBody = document.getElementById("terminal-body");
     const inputRow = termInput.parentElement;
@@ -291,13 +292,11 @@
       projects: "1. Offline P2P Messenger (Flutter + WebRTC)\n2. Sumo & Desktop Companion Robots (ESP32)\n3. Jarvis AI Voice Assistant (Python)",
       contact: "WhatsApp: 01278341932\nGitHub: github.com/Sasaet2\nEmail: sas045566@gmail.com\nDomain: samuelsobhi.me"
     };
-
     termInput.addEventListener("keydown", event => {
       if (event.key !== "Enter") return;
       const value = termInput.value.trim();
       const rawCommand = value.toLowerCase();
       if (!rawCommand) return;
-
       const historyLine = document.createElement("div");
       historyLine.className = "terminal-line";
       const prompt = document.createElement("span");
@@ -305,7 +304,6 @@
       prompt.textContent = "guest@samuel:~$";
       historyLine.append(prompt, ` ${value}`);
       termBody.insertBefore(historyLine, inputRow);
-
       if (rawCommand === "clear") {
         termBody.querySelectorAll(".terminal-line").forEach(line => line.remove());
       } else {
@@ -317,12 +315,10 @@
       termInput.value = "";
       termBody.scrollTop = termBody.scrollHeight;
     });
-
     const canvas = document.getElementById("particles-canvas");
     const ctx = canvas.getContext("2d");
     const particles = [];
     const mouse = { x: null, y: null };
-
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -333,7 +329,6 @@
       mouse.y = event.clientY;
     });
     resizeCanvas();
-
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -356,7 +351,6 @@
       }
     }
     for (let i = 0; i < 65; i++) particles.push(new Particle());
-
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((particle, i) => {
