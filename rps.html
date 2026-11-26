@@ -131,9 +131,17 @@
     const playerScoreEl = document.getElementById("player-score");
     const computerScoreEl = document.getElementById("computer-score");
 
+    let lastMove = null;
+    let sameCount = 0;
+
     function computerMove() {
-      const keys = Object.keys(moves);
-      return keys[Math.floor(Math.random() * keys.length)];
+      let keys = Object.keys(moves);
+      // never the same move more than 2 times in a row
+      if (sameCount >= 2) keys = keys.filter(k => k !== lastMove);
+      const pick = keys[Math.floor(Math.random() * keys.length)];
+      sameCount = pick === lastMove ? sameCount + 1 : 1;
+      lastMove = pick;
+      return pick;
     }
 
     function play(playerMove) {
