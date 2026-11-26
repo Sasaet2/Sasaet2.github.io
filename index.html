@@ -8,15 +8,19 @@
   <meta name="keywords" content="Samuel Sobhi, صموئيل صبحي, Arduino, ESP32, Python, برمجة, مشاريع">
   <meta name="author" content="Samuel Sobhi">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="canonical" href="https://samuelsobhi.me">
+  <link rel="canonical" href="https://www.samuelsobhi.me/">
   <meta property="og:title" content="صموئيل صبحي — Samuel Sobhi">
   <meta property="og:description" content="طالب بيتعلم برمجة وهاردوير لوحده. مشاريع Arduino وESP32 وPython بكود مفتوح على GitHub.">
-  <meta property="og:url" content="https://samuelsobhi.me">
+  <meta property="og:url" content="https://www.samuelsobhi.me/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://samuelsobhi.me/preview.png">
+  <meta property="og:site_name" content="صموئيل صبحي — Samuel Sobhi">
+  <meta property="og:locale" content="ar_EG">
+  <meta property="og:image" content="https://www.samuelsobhi.me/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="صموئيل صبحي — Samuel Sobhi">
+  <meta name="twitter:description" content="طالب بيتعلم برمجة وهاردوير لوحده. مشاريع Arduino وESP32 وPython بكود مفتوح على GitHub.">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0f13">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0">
   <script>
@@ -33,7 +37,7 @@
     "@type": "Person",
     "name": "Samuel Sobhi",
     "alternateName": "صموئيل صبحي",
-    "url": "https://samuelsobhi.me",
+    "url": "https://www.samuelsobhi.me/",
     "sameAs": ["https://github.com/Sasaet2"]
   }
   </script>
@@ -263,7 +267,7 @@
     .red { background: #ef4444; } .yellow { background: #f59e0b; } .green { background: #10b981; }
     .terminal-title { margin-left: auto; color: #8b8d94; font-size: .8rem; }
     .terminal-body { min-height: 230px; max-height: 340px; overflow-y: auto; padding: 20px; color: #e8e6e1; font-size: .9rem; }
-    .terminal-line { margin-bottom: 9px; white-space: pre-line; }
+    .terminal-line { margin-bottom: 9px; white-space: pre-wrap; }
     .prompt { color: #f0a04b; font-weight: 600; }
     .cmd-output { color: #7dd3a8; }
     .terminal-input-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
@@ -294,6 +298,40 @@
     footer .foot-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
     footer .mono { font-size: .82rem; direction: ltr; }
 
+    /* ---------- accessibility: skip link, focus, reduced motion ---------- */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      right: 12px;
+      padding: 10px 18px;
+      border-radius: 0 0 10px 10px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 700;
+      text-decoration: none;
+      z-index: 100;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    .terminal-input-row:focus-within {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 6px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+    }
+
+    /* ---------- scrollspy + terminal links + project link groups ---------- */
+    .nav-links a.current { color: var(--accent); }
+    .cmd-output a { color: var(--accent); }
+    .go-group { display: flex; flex-direction: column; gap: 8px; }
+
     @media (max-width: 768px) {
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
       .nav-links {
@@ -318,11 +356,12 @@
       .spec-row { grid-template-columns: 1fr; gap: 4px; }
       .spec-row dt { text-align: right; }
       .project { grid-template-columns: 34px 1fr; }
-      .project .go { grid-column: 2; }
+      .project .go, .project .go-group { grid-column: 2; }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#home">تخطَّ إلى المحتوى</a>
   <div class="container">
     <header class="top">
       <a class="logo" href="#home">&lt;samuel<b>.dev</b>/&gt;</a>
@@ -436,7 +475,10 @@
               <p>حجر ورقة مقص ضد الكمبيوتر بواجهة عربية ولوحة نتائج مباشرة. ملف HTML واحد بس.</p>
               <div class="tags"><span>HTML/CSS/JS</span><span>Game</span></div>
             </div>
-            <a class="go" href="https://github.com/Sasaet2/rock-paper-scissors" target="_blank" rel="noopener">الكود ←</a>
+            <div class="go-group">
+              <a class="go" href="rps.html">العبها لايف ←</a>
+              <a class="go" href="https://github.com/Sasaet2/rock-paper-scissors" target="_blank" rel="noopener">الكود ←</a>
+            </div>
           </li>
         </ol>
       </section>
@@ -450,7 +492,7 @@
             <div class="terminal-input-row"><span class="prompt">guest@samuel:~$</span><input id="terminal-input" type="text" autocomplete="off" aria-label="أدخل أمر التيرمينال"></div>
           </div>
         </div>
-        <p class="terminal-hint">جرب تكتب <code>projects</code> أو <code>skills</code> أو <code>about</code></p>
+        <p class="terminal-hint">جرب تكتب <code>help</code> أو <code>theme</code> أو <code>play</code> — وفيه أوامر بالعربي كمان</p>
       </section>
 
       <section id="contact">
@@ -493,11 +535,23 @@
       const isOpen = navLinks.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", String(isOpen));
     });
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
     navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", closeMenu);
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+    document.addEventListener("click", event => {
+      if (navLinks.classList.contains("open") && !event.target.closest("nav") && event.target !== menuToggle) {
+        closeMenu();
+      }
     });
 
     /* ---- interactive terminal ---- */
@@ -505,12 +559,29 @@
     const termBody = document.getElementById("terminal-body");
     const inputRow = termInput.parentElement;
     const commands = {
-      help: "Commands:\n  about     who is Samuel\n  skills    what he works with\n  projects  the five starter projects\n  contact   ways to reach him\n  clear     clear the screen",
+      help: "Commands:\n  about      who is Samuel\n  skills     what he works with\n  projects   the five starter projects\n  play       play rock-paper-scissors (opens the game)\n  github     Samuel's GitHub profile\n  contact    ways to reach him\n  theme      toggle dark/light mode\n  date       today's date\n  whoami     who are you?\n  clear      clear the screen\n\nبالعربي برضه: مساعدة · نبذة · مهارات · مشاريع · العب · تواصل",
       about: "Samuel Sobhi - a student in Cairo learning programming\nand hardware. He publishes his starter projects on GitHub\nto study, run and improve them as he learns.",
       skills: "Arduino + ESP32 (C++): WiFi boards, web servers on the chip, sensors\nPython: CLI tools and games, tested before publishing\nHTML/CSS/JS: full pages with no frameworks\nGit + GitHub: clean repos and clear READMEs",
-      projects: "01 esp32-wifi-led-controller   control an LED from your browser\n02 esp32-weather-station       temp + humidity dashboard on the chip\n03 python-quiz-game            tech quiz in the terminal\n04 python-password-generator   secure CLI password maker\n05 rock-paper-scissors         the classic game, Arabic UI\nall at github.com/Sasaet2",
-      contact: "WhatsApp  01278341932\nEmail     sas045566@gmail.com\nGitHub    github.com/Sasaet2\nSite      samuelsobhi.me"
+      projects: "01 esp32-wifi-led-controller   control an LED from your browser\n02 esp32-weather-station       temp + humidity dashboard on the chip\n03 python-quiz-game            tech quiz in the terminal\n04 python-password-generator   secure CLI password maker\n05 rock-paper-scissors         play it live: samuelsobhi.me/rps.html\nall at github.com/Sasaet2",
+      contact: "WhatsApp  01278341932\nEmail     sas045566@gmail.com\nGitHub    github.com/Sasaet2\nSite      samuelsobhi.me",
+      whoami: "guest - and thanks for stopping by :)",
+      sudo: "nice try :) this terminal only answers to curiosity."
     };
+    const aliases = {
+      "مساعدة": "help",
+      "نبذة": "about",
+      "مهارات": "skills",
+      "مشاريع": "projects",
+      "العب": "play",
+      "تواصل": "contact",
+      "امسح": "clear"
+    };
+    function printLine(text) {
+      const response = document.createElement("div");
+      response.className = "terminal-line cmd-output";
+      response.textContent = text;
+      termBody.insertBefore(response, inputRow);
+    }
     termInput.addEventListener("keydown", event => {
       if (event.key !== "Enter") return;
       const value = termInput.value.trim();
@@ -523,17 +594,53 @@
       prompt.textContent = "guest@samuel:~$";
       historyLine.append(prompt, ` ${value}`);
       termBody.insertBefore(historyLine, inputRow);
-      if (rawCommand === "clear") {
+      const command = aliases[rawCommand] || rawCommand;
+      if (command === "clear") {
         termBody.querySelectorAll(".terminal-line").forEach(line => line.remove());
-      } else {
+      } else if (command === "theme") {
+        const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        applyTheme(next);
+        printLine(next === "dark" ? "Switched to dark mode." : "Switched to light mode.");
+      } else if (command === "date") {
+        printLine(new Date().toDateString());
+      } else if (command === "github" || command === "play") {
         const response = document.createElement("div");
         response.className = "terminal-line cmd-output";
-        response.textContent = commands[rawCommand] || `command not found: ${value} - try 'help'`;
+        const link = document.createElement("a");
+        link.target = "_blank";
+        link.rel = "noopener";
+        if (command === "github") {
+          link.href = "https://github.com/Sasaet2";
+          link.textContent = "github.com/Sasaet2";
+          response.append("Opening ", link, " - 5 repos and counting.");
+        } else {
+          link.href = "rps.html";
+          link.textContent = "samuelsobhi.me/rps.html";
+          response.append("Opening ", link, " - good luck!");
+        }
         termBody.insertBefore(response, inputRow);
+        window.open(link.href, "_blank", "noopener");
+      } else {
+        printLine(commands[command] || `command not found: ${value} - try 'help' (أو 'مساعدة')`);
       }
       termInput.value = "";
       termBody.scrollTop = termBody.scrollHeight;
     });
+
+    /* ---- scrollspy: highlight the current section in the nav ---- */
+    const spyLinks = new Map();
+    navLinks.querySelectorAll("a").forEach(a => spyLinks.set(a.getAttribute("href").slice(1), a));
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const link = spyLinks.get(entry.target.id);
+        if (!link || !entry.isIntersecting) return;
+        navLinks.querySelectorAll("a").forEach(a => { a.classList.remove("current"); a.removeAttribute("aria-current"); });
+        link.classList.add("current");
+        link.setAttribute("aria-current", "true");
+      });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    spyLinks.forEach((link, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
   </script>
 </body>
 </html>
