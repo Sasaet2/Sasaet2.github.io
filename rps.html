@@ -52,6 +52,11 @@
       cursor: pointer;
       transition: .2s;
     }
+    .choice { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+    .choice:active { transform: scale(.92); }
+    @keyframes pop { from { opacity: .2; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+    .result.pop { animation: pop .25s ease-out; }
+    @media (hover: none) { .choice:hover { transform: none; border-color: rgba(255,255,255,.15); } }
     .choice:hover { transform: translateY(-6px) scale(1.05); border-color: #00f3ff; }
     .result {
       min-height: 80px;
@@ -120,6 +125,7 @@
 
     let playerScore = 0;
     let computerScore = 0;
+    let round = 0;
 
     const resultEl = document.getElementById("result");
     const playerScoreEl = document.getElementById("player-score");
@@ -132,9 +138,10 @@
 
     function play(playerMove) {
       const computer = computerMove();
+      round++;
       const you = moves[playerMove];
       const cpu = moves[computer];
-      const picked = `أنت ${you.emoji} ${you.name} — الكمبيوتر ${cpu.emoji} ${cpu.name}`;
+      const picked = `<small>الجولة ${round}</small><br>أنت ${you.emoji} ${you.name} — الكمبيوتر ${cpu.emoji} ${cpu.name}`;
 
       if (playerMove === computer) {
         resultEl.innerHTML = `${picked}<br><span class="draw">تعادل!</span>`;
@@ -147,6 +154,9 @@
       }
       playerScoreEl.textContent = playerScore;
       computerScoreEl.textContent = computerScore;
+      resultEl.classList.remove("pop");
+      void resultEl.offsetWidth;
+      resultEl.classList.add("pop");
     }
 
     document.querySelectorAll(".choice").forEach(button => {
@@ -156,6 +166,7 @@
     document.getElementById("reset").addEventListener("click", () => {
       playerScore = 0;
       computerScore = 0;
+      round = 0;
       playerScoreEl.textContent = "0";
       computerScoreEl.textContent = "0";
       resultEl.textContent = "اختر حركتك!";
@@ -163,3 +174,4 @@
   </script>
 </body>
 </html>
+
